@@ -1,0 +1,2 @@
+在使用pthread_xxx功能时，需要链接libpthread.so
+只有调用pthread_exit时,pthread_cleanup_push才起作用

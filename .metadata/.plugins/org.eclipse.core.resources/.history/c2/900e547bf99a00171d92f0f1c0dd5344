@@ -1,0 +1,11 @@
+在使用pthread_xxx功能时，需要链接libpthread.so
+
+pthread_create中的attr可不指定
+
+通过属性设置线程为可分离pthread_attr_setdetachstate，也可调用pthread_detach(pthread_t tid).
+设置线程pthread_detach后，不可再调用pthread_join
+
+//只有调用pthread_exit时,pthread_cleanup_push才起作用(Linux下return也可以实现pthread_cleanup_push的调用)
+
+
+
