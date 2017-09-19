@@ -4,12 +4,18 @@
 #include<errno.h>
 #include<string.h>
 
-int main()
+int main(int argc, char *argv[])
 {
-    fopen("xxx.txt","r");//file doesn't exit
     printf("errno is %d, %s\n",errno,strerror(errno));
     int iSysCallRet = 0;
-    const char *pszCmd1 = "tar -tvf xxx";
-    iSysCallRet = system(pszCmd1);
-    printf("cmd [%s] iSysCallRet is %d, errno = %d\n",pszCmd1, iSysCallRet, errno);
+    //const char *pszCmd1 = "tar -tvf xxx"; /home/gitHub/LinuxCTest/SystemErrnoTest
+    char szCmd1[50] = {0};
+    if(argc > 1)
+        sprintf(szCmd1,"/home/gitHub/LinuxCTest/SystemErrnoTest/myCmd %s", argv[1]);
+    else
+        sprintf(szCmd1,"/home/gitHub/LinuxCTest/SystemErrnoTest/myCmd");
+    iSysCallRet = system(szCmd1);
+    printf("cmd [%s] iSysCallRet is %#X, errno = %d\n",szCmd1, iSysCallRet, errno);
+    
+    return 0;
 }
