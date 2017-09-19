@@ -1,3 +1,0 @@
-system函数返回值以及errno的测试
-main.cpp 主程序
-myCmd.cpp 生成一个可执行程序，由主程序经system()调用
