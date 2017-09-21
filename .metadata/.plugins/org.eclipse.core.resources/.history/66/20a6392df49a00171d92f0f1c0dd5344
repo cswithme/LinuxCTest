@@ -1,7 +1,0 @@
-/*
- * err.h
- *
- *  Created on: 2017-9-16
- *      Author: root
- */
-void	err_exit(int, const char *, ...) __attribute__((noreturn));

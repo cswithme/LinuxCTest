@@ -2,3 +2,4 @@ Debug/
 debug/
 *.out
 *.o
+.metadata/
