@@ -10,10 +10,13 @@
 
 void localAndGmtimeFuncTest();
 void TimeSpecAndValTest();
+void testCalcRunTime();
 
 int main(void)
 {
 	localAndGmtimeFuncTest();
 	TimeSpecAndValTest();
+
+	testCalcRunTime();
 	return 0;
 }
