@@ -17,15 +17,21 @@ pthread_barrier_t pb;
 
 void *threadFunc(void *arg)
 {
-	unsigned int uiParm = (unsigned int )arg;
+	struct timespec tsBegin;
+	unsigned int uiParm = *(unsigned int *)arg;
 	usleep(uiParm * 400 * 1000); //不同的线程，运行至pthread_barrier_wait的时间不同
 	int iRet = pthread_barrier_wait(&pb);
 	if(iRet == PTHREAD_BARRIER_SERIAL_THREAD)
 		printf("thread num%d, is the last one\n",uiParm);
-	printf("thread %d start, pid = %u\n", uiParm, (unsigned int)pthread_self());
+
+	clock_gettime(CLOCK_REALTIME, &tsBegin);
+	printf("thread %d start at tv_sec[%ld], tv_usec[%ld](ns), pid = %u\n",
+			uiParm, tsBegin.tv_sec, tsBegin.tv_nsec, (unsigned int)pthread_self());
+
 	printf("Thread num%d will exit!\n", uiParm);
 	return((void *)1);
 }
+
 
 
 void PthreadBarrierTest()
@@ -34,9 +40,12 @@ void PthreadBarrierTest()
 	pthread_t tid[ciThreadCnt];
 	pthread_barrier_init(&pb, NULL, ciThreadCnt+1);
 
+	unsigned int uiSleepArry[4] = {1,2,3,4};
+
 	for(int i=0; i<ciThreadCnt; ++i)
 	{
-		int err = pthread_create(&tid[i], NULL, threadFunc, (void *)i);
+		int err = pthread_create(&tid[i], NULL, threadFunc, (void *)&uiSleepArry[i]);
+//		int err = pthread_create(&tid[i], NULL, threadFunc, (void *)&i); //此处不可用i，等到线程访问时，i的值已经变了
 		if (err != 0)
 		{
 			printf("can't create thread Num: %d\n", i);
