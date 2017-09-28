@@ -1,1 +1,0 @@
-在使用pthread_xxx功能时，需要链接libpthread.so

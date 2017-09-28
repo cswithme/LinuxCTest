@@ -1,7 +1,0 @@
-在使用pthread_xxx功能时，需要链接libpthread.so
-
-只有调用pthread_exit时,pthread_cleanup_push才起作用
-
-pthread_create中的attr可不指定
-
-通过属性设置线程为可分离pthread_attr_setdetachstate，也可调用pthread_detach(pthread_t tid);
