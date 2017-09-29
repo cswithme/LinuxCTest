@@ -24,6 +24,7 @@ void localAndGmtimeFuncTest()
 	printTmStruct(pTm); putchar('\n');
 	time_t tmMakeGm = mktime(pTm);//mktime与localtime函数功能相反
 
+	//Fixit localtime函数不可重入,多线程调用应用localtime_r
 	pTm = localtime(&tTime);//xxx 将time_t转化为带有年月日的结构体
 	puts("localtime Rus: gmtime return UTCx time,由/etc/localtime决定时区");
 	printTmStruct(pTm); putchar('\n');
