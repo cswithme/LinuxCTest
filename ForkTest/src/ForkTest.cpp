@@ -1,0 +1,42 @@
+#include <iostream>
+
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <errno.h>
+
+/*
+ *  fork_test.c
+ *  version 1
+ *  Created on: 2010-5-29
+ *      Author: wangth
+ */
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+int main ()
+{
+
+	pid_t fpid; //fpid表示fork函数返回的值
+	int count=0;
+	fpid=fork();
+	if (fpid < 0)
+		printf("error in fork!");
+
+	else if (fpid == 0)
+	{
+		printf("i am the child process, my process id is %d\n",getpid());
+		execl("/home/gitHub/LinuxCTest/TrickProcess/Debug/TrickProcess","TrickProcess",NULL);
+		count++;
+	}
+
+	else
+	{
+		printf("i am the parent process, my process id is %d\n",getpid());
+//		system("/home/gitHub/LinuxCTest/TrickProcess/Debug/TrickProcess");
+		count++;
+	}
+	printf("统计结果是: %d\n",count);
+//	sleep(300);
+	sleep(20);
+	return 0;
+}

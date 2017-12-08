@@ -65,6 +65,9 @@ unsigned long caclFuncRunTime(P_Func pFunc, void* parm, unsigned int uiFuncRunCn
 
 	unsigned long ulTimeUsedMs = (tsEnd.tv_sec - tsBegin.tv_sec)*1000 + (tsEnd.tv_nsec - tsBegin.tv_nsec)/1000000;
 	printf("func exe use %lu ms \n",ulTimeUsedMs);
+    
+    printf("Time spend:tv_sec[%ld], tv_usec[%ld](ns)\n", tsEnd.tv_sec-tsBegin.tv_sec,
+			tsEnd.tv_nsec-tsBegin.tv_nsec);
 	return ulTimeUsedMs;
 
 }
