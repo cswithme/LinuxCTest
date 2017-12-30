@@ -1,0 +1,17 @@
+执行脚本run.sh就能编译观察效果
+
+用于生成libtest.so动态库
+	libTestFunc_a.cpp 中 void genCoreFunc()可产生core
+	libTestFunc_b.cpp
+	libTestFunc.h
+	
+链接时就使用动态库
+	main.cpp
+	
+代码指定动态库加载 dlopen dlsym
+	mainWithDynamicLoad
+	
+	
+ps:
+	//如果函数不声明 extern "C" ,则函数名会被name mangling,此处的函数名可用readelf -s找出来
+    // pFuncA = (P_PrintFunca)dlsym(libHandle, "_Z15printTestFunc_av"); 
