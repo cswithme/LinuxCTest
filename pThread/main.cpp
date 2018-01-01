@@ -14,6 +14,7 @@
 
 void CleanupFuncTest();
 void PthreadBarrierTest();
+void Pthread_atforkTest();
 
 
 //计算函数运行时间
@@ -41,7 +42,9 @@ int main(void)
 {
 //	CleanupFuncTest();
 
-	caclFuncRunTime(PthreadBarrierTest, 1);
+//	caclFuncRunTime(PthreadBarrierTest, 1);
 //	PthreadBarrierTest();
+
+	Pthread_atforkTest();
 	exit(0);
 }
