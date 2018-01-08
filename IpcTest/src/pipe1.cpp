@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAXLINE 200
 
-int main(void)
+
+int Pipe1Test()
 {
 	int		n;
 	int		fd[2];
@@ -21,7 +23,7 @@ int main(void)
 	else if (pid > 0)	//parent
 	{
 		close(fd[0]);
-		write(fd[1], "hello world xiaxiaxia\n", 16);
+		write(fd[1], "hello world xiaxiaxia\n", strlen("hello world xiaxiaxia\n"));
 	}
 	else //child
 	{
@@ -29,5 +31,5 @@ int main(void)
 		n = read(fd[0], line, MAXLINE);
 		write(STDOUT_FILENO, line, n);
 	}
-	exit(0);
+	return 0;
 }
