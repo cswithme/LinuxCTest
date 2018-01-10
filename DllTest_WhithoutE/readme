@@ -15,3 +15,9 @@
 ps:
 	//如果函数不声明 extern "C" ,则函数名会被name mangling,此处的函数名可用readelf -s找出来
     // pFuncA = (P_PrintFunca)dlsym(libHandle, "_Z15printTestFunc_av"); 
+	
+	
+	
+20180110 添加GCC4.4.5 -std=c++0x 编译选项的测试
+	动态库添加-std=c++0x编译选项,应用程序不使用-std=c++0x编译选项
+	原makefile备份为Makefiel.normal

@@ -11,7 +11,11 @@ int main()
     
     printTestFunc_a();
     printTestFunc_b();
-
+    
+    puts("cpp11Func Test Begin!!!!");
+    cpp11Func();
+    puts("cpp11Func Test end!!!!");
+    
     genCoreFunc();
     
     puts("Test End!");
