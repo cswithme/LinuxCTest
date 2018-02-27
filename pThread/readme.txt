@@ -8,5 +8,5 @@ pthread_create中的attr可不指定
 只有调用pthread_exit时,pthread_cleanup_push才起作用(Linux下return也可以实现pthread_cleanup_push的调用).
 为可移植性,尽量调用pthread_exit
 
-
+0201 添加线程内存空间互访测试,用线程2访问线程1的栈,前提是线程2知道线程1的栈地址
 

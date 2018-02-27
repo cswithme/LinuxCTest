@@ -11,6 +11,10 @@
 #include <pthread.h>
 #include "apue.h"
 
+unsigned int *puiThread1Stack = NULL;
+pthread_mutex_t mutexData = PTHREAD_MUTEX_INITIALIZER;
+
+
 void cleanupFunc(void *arg)
 {
 	printf("cleanup: %s\n", (char *)arg);
@@ -22,6 +26,12 @@ void *thr_fn1(void *arg)
 	pthread_cleanup_push(cleanupFunc, (void *)"thread 1 first handler");
 	pthread_cleanup_push(cleanupFunc, (void *)"thread 1 second handler");
 	printf("thread 1 push complete\n");
+
+
+	unsigned int iTemp = 666;
+	puiThread1Stack = &iTemp;
+
+	/**/
 
 	if (arg)	return((void *)1); //arg 不为null 总是执行此处
 
