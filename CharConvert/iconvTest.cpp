@@ -99,6 +99,25 @@ bool CodeConvert(const char *pszOldEncoding,const char *pszNewEncoding,
 	return true;
 }
 
+//当文本编码已经为tuf-8时,使用GB18030->utf8的结果
+void functionTest()
+{
+	puts("\n\n functionTest Begin!");
+
+	char szIn[50] = {0};
+	snprintf(szIn, sizeof(szIn), "单程票");
+	char szRus[50] = {0};
+	unsigned int uiRusLen = sizeof(szRus);
+	printf("单程票<%s> strlen(单程票):%u sizeof(单程票):%u\n","单程票", strlen("单程票"), sizeof("单程票"));
+//	if(!CodeConvert("UTF-8", "GB18030" , szIn, strlen(szIn),  szRus, &uiRusLen))
+	if(!CodeConvert("GB18030" , "UTF-8", szIn, strlen(szIn),  szRus, &uiRusLen))
+	{
+		puts("CodeConvert Error!");
+	}
+	printf("rus<%s> strlen(rus)%u\n", szRus, strlen(szRus));
+	puts("functionTest end!\n");
+}
+
 int main()
 {
 	//IGNORE
@@ -122,6 +141,8 @@ int main()
 	for(unsigned int i=0; i< sizeof(szRus)-uRusLen; ++i)
 		printf("%02X ", *((unsigned char*)szRus + i) );
 	putchar('\n');
+
+	functionTest();
 
 	return 0;
 }

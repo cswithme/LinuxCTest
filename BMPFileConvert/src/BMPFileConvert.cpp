@@ -12,6 +12,6 @@ using namespace std;
 
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
-	ReadBmp("2.bmp");
+	ReadBmp("/BMP_24bit/正常服务.bmp");
 	return 0;
 }
