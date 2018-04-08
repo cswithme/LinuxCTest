@@ -43,6 +43,7 @@ int main()
 	}
 	//发送一个消息后，输出消息队列属性
 	msg_stat(msgid, msg_ginfo);
+//	rflags = IPC_NOWAIT | MSG_NOERROR | MSG_EXCEPT;
 	rflags = IPC_NOWAIT | MSG_NOERROR;
 	reval = msgrcv(msgid, &msg_rbuf, 4, 10, rflags);
 	if (reval == -1)
