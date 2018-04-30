@@ -5,12 +5,14 @@
 
 int Pipe1Test();
 int Pipe2Test(int argc, char *argv[]);
+int SemTest();
 
 int main(int argc, char *argv[])
 {
 	printf("Test Begin!\n");
 //	Pipe1Test();
-	Pipe2Test(0, NULL);
+//	Pipe2Test(0, NULL);
+	SemTest();
 	printf("Test End!\n");
 	return 0;
 }
