@@ -14,6 +14,8 @@
 #include "PubXml.h"
 using namespace std;
 
+void MutileThreadTest();
+
 bool PubXmlTest()
 {
 	CPubXml pubXml;
@@ -60,7 +62,8 @@ bool PubXmlTest()
 int main()
 {
 	cout << "Test CPubXmlTest!" << endl; // prints
-	PubXmlTest();
+//	PubXmlTest();
+	MutileThreadTest();
 	puts("Test end!");
 	//LedShowParam.xml
 	return 0;
