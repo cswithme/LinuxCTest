@@ -17,7 +17,7 @@ libTestFunc_b.o: libTestFunc_b.cpp
 	
 # main FUNC
 main: ${OBJS} libtest.so
-	${CXX} ${CXXFLAGS} -ltest -L. -o $@ ${OBJS}
+	${CXX} ${CXXFLAGS} -ltest -ldl -L. -o $@ ${OBJS}
 
 main.o: main.cpp
 	${CXX} -c ${CXXFLAGS} -o $@ $^
