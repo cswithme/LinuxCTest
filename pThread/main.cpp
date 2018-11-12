@@ -16,6 +16,7 @@ void CleanupFuncTest();
 void PthreadBarrierTest();
 void Pthread_atforkTest();
 void DeleteCalssWithThreadTest();
+void semTest();
 
 //计算函数运行时间
 typedef void (*P_Func)();
@@ -47,6 +48,9 @@ int main(void)
 
 //	Pthread_atforkTest();
 
-	DeleteCalssWithThreadTest();
+//	DeleteCalssWithThreadTest();
+
+	semTest();
+
 	exit(0);
 }
