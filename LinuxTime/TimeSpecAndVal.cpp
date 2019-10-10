@@ -54,8 +54,8 @@ unsigned long caclFuncRunTime(P_Func pFunc, void* parm, unsigned int uiFuncRunCn
 unsigned long caclFuncRunTime(P_Func pFunc, void* parm, unsigned int uiFuncRunCnt)
 {
 	struct timespec tsBegin,tsEnd;
-	clock_gettime(CLOCK_REALTIME, &tsBegin);
-	printf("Before Call Func: tv_sec[%ld], tv_usec[%ld](ns)\n", tsBegin.tv_sec, tsBegin.tv_nsec);
+	int iRet = clock_gettime(CLOCK_REALTIME, &tsBegin);
+	printf("iRet(%d)Before Call Func: tv_sec[%ld], tv_usec[%ld](ns)\n", iRet, tsBegin.tv_sec, tsBegin.tv_nsec);
 
 	for(unsigned int i=0; i<uiFuncRunCnt; ++i)
 		pFunc(parm); //call func
@@ -64,10 +64,10 @@ unsigned long caclFuncRunTime(P_Func pFunc, void* parm, unsigned int uiFuncRunCn
 	printf("After Call Func: tv_sec[%ld], tv_usec[%ld](ns)\n", tsEnd.tv_sec, tsEnd.tv_nsec);
 
 	unsigned long ulTimeUsedMs = (tsEnd.tv_sec - tsBegin.tv_sec)*1000 + (tsEnd.tv_nsec - tsBegin.tv_nsec)/1000000;
-	printf("func exe use %lu ms \n",ulTimeUsedMs);
+	printf("***********************func exe use %lu ms ***********************\n",ulTimeUsedMs);
     
-    printf("Time spend:tv_sec[%ld], tv_usec[%ld](ns)\n", tsEnd.tv_sec-tsBegin.tv_sec,
-			tsEnd.tv_nsec-tsBegin.tv_nsec);
+//    printf("Time spend:tv_sec[%ld], tv_usec[%ld](ns)\n", tsEnd.tv_sec-tsBegin.tv_sec,
+//			tsEnd.tv_nsec-tsBegin.tv_nsec);
 	return ulTimeUsedMs;
 
 }
@@ -83,8 +83,7 @@ void func(void *parm)
 
 void func1(void *parm)
 {
-	char szTemp[4096] = {0};
-	szTemp[0] = 22;
+	usleep(850 * 1000);
 }
 
 void func2(void *parm)
@@ -96,11 +95,11 @@ void func2(void *parm)
 
 void testCalcRunTime()
 {
-	int iTemp = 0x666;
-	caclFuncRunTime(func, (void *)&iTemp);
+//	int iTemp = 0x666;
+//	caclFuncRunTime(func, (void *)&iTemp);
 
-	puts("\ninit: ");
-	caclFuncRunTime(func1, NULL, 1000*1000);
-	puts("\nmemset: ");
-	caclFuncRunTime(func2, NULL, 1000*1000);
+//	puts("\ninit: ");
+	caclFuncRunTime(func1, NULL, 1);
+//	puts("\nmemset: ");
+//	caclFuncRunTime(func2, NULL, 1000*1000);
 }
