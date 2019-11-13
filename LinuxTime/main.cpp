@@ -11,14 +11,17 @@
 void localAndGmtimeFuncTest();
 void TimeSpecAndValTest();
 void testCalcRunTime();
+void tempTest();
 
 int main(void)
 {
 //	localAndGmtimeFuncTest();
 //	TimeSpecAndValTest();
 
-	while(1){
-		testCalcRunTime();
-	}
+//	while(1){
+//		testCalcRunTime();
+//	}
+
+	tempTest();
 	return 0;
 }

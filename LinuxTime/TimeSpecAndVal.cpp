@@ -93,7 +93,7 @@ void func2(void *parm)
 	szTemp[0] = 22;
 }
 
-void testCalcRunTime()
+void testCalcRunTime1()
 {
 //	int iTemp = 0x666;
 //	caclFuncRunTime(func, (void *)&iTemp);

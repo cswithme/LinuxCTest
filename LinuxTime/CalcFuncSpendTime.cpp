@@ -37,7 +37,7 @@ unsigned long CaclFuncRunTime(Ptr_Func pFunc, void* parm, unsigned int uiFuncRun
 
 }
 
-void func2(void *parm)
+void func3(void *parm)
 {
 	char szTemp[4096];
 	memset(szTemp, 0, sizeof(szTemp));
@@ -50,7 +50,7 @@ void testCalcRunTime()
 //	caclFuncRunTime(func, (void *)&iTemp);
 
 //	puts("\ninit: ");
-	caclFuncRunTime(func2, NULL, 1);
+	CaclFuncRunTime(func3, NULL, 1);
 //	puts("\nmemset: ");
 //	caclFuncRunTime(func2, NULL, 1000*1000);
 }
