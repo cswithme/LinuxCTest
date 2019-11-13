@@ -2200,11 +2200,10 @@ event_del_internal(struct event *ev)
 	int res = 0, notify = 0;
 
 	event_debug(("event_del: %p (fd "EV_SOCK_FMT"), callback %p",
-		ev, EV_SOCK_ARG(ev->ev_fd), ev->ev_callback));
+					ev, EV_SOCK_ARG(ev->ev_fd), ev->ev_callback));
 
 	/* An event without a base has not been added */
-	if (ev->ev_base == NULL)
-		return (-1);
+	if(ev->ev_base == NULL) return (-1);
 
 	EVENT_BASE_ASSERT_LOCKED(ev->ev_base);
 
@@ -2215,7 +2214,7 @@ event_del_internal(struct event *ev)
 	 * user-supplied argument. */
 	base = ev->ev_base;
 #ifndef _EVENT_DISABLE_THREAD_SUPPORT
-	if (base->current_event == ev && !EVBASE_IN_THREAD(base)) {
+	if(base->current_event == ev && !EVBASE_IN_THREAD(base)) {
 		++base->current_event_waiters;
 		EVTHREAD_COND_WAIT(base->current_event_cond, base->th_base_lock);
 	}
@@ -2224,14 +2223,14 @@ event_del_internal(struct event *ev)
 	EVUTIL_ASSERT(!(ev->ev_flags & ~EVLIST_ALL));
 
 	/* See if we are just active executing this event in a loop */
-	if (ev->ev_events & EV_SIGNAL) {
-		if (ev->ev_ncalls && ev->ev_pncalls) {
+	if(ev->ev_events & EV_SIGNAL) {
+		if(ev->ev_ncalls && ev->ev_pncalls) {
 			/* Abort loop */
 			*ev->ev_pncalls = 0;
 		}
 	}
 
-	if (ev->ev_flags & EVLIST_TIMEOUT) {
+	if(ev->ev_flags & EVLIST_TIMEOUT) {
 		/* NOTE: We never need to notify the main thread because of a
 		 * deleted timeout event: all that could happen if we don't is
 		 * that the dispatch loop might wake up too early.  But the
@@ -2242,16 +2241,13 @@ event_del_internal(struct event *ev)
 		event_queue_remove(base, ev, EVLIST_TIMEOUT);
 	}
 
-	if (ev->ev_flags & EVLIST_ACTIVE)
-		event_queue_remove(base, ev, EVLIST_ACTIVE);
+	if(ev->ev_flags & EVLIST_ACTIVE) event_queue_remove(base, ev, EVLIST_ACTIVE);
 
-	if (ev->ev_flags & EVLIST_INSERTED) {
+	if(ev->ev_flags & EVLIST_INSERTED) {
 		event_queue_remove(base, ev, EVLIST_INSERTED);
-		if (ev->ev_events & (EV_READ|EV_WRITE))
-			res = evmap_io_del(base, ev->ev_fd, ev);
-		else
-			res = evmap_signal_del(base, (int)ev->ev_fd, ev);
-		if (res == 1) {
+		if(ev->ev_events & (EV_READ | EV_WRITE)) res = evmap_io_del(base, ev->ev_fd, ev);
+		else res = evmap_signal_del(base, (int) ev->ev_fd, ev);
+		if(res == 1) {
 			/* evmap says we need to notify the main thread. */
 			notify = 1;
 			res = 0;
@@ -2259,8 +2255,7 @@ event_del_internal(struct event *ev)
 	}
 
 	/* if we are not in the right thread, we need to wake up the loop */
-	if (res != -1 && notify && EVBASE_NEED_NOTIFY(base))
-		evthread_notify_base(base);
+	if(res != -1 && notify && EVBASE_NEED_NOTIFY(base)) evthread_notify_base(base);
 
 	_event_debug_note_del(ev);
 
@@ -2479,21 +2474,20 @@ timeout_process(struct event_base *base)
 	struct timeval now;
 	struct event *ev;
 
-	if (min_heap_empty(&base->timeheap)) {
+	if(min_heap_empty(&base->timeheap)) {
 		return;
 	}
 
 	gettime(base, &now);
 
-	while ((ev = min_heap_top(&base->timeheap))) {
-		if (evutil_timercmp(&ev->ev_timeout, &now, >))
-			break;
+	while((ev = min_heap_top(&base->timeheap))) {
+		if(evutil_timercmp(&ev->ev_timeout, &now, >)) break;
 
 		/* delete this event from the I/O queues */
 		event_del_internal(ev);
 
 		event_debug(("timeout_process: call %p",
-			 ev->ev_callback));
+						ev->ev_callback));
 		event_active_nolock(ev, EV_TIMEOUT, 1);
 	}
 }

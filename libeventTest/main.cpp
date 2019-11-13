@@ -14,16 +14,17 @@
 #include "ServerSocket.h"
 #include "libeventTest.h"
 
-int main()
+int main(int argc, char **argv)
 {
 	using namespace std;
 
 	cout << "Test Begin" << endl; // prints 23333
 
-//	evTimerTest();
+	evTimerTest();
 //	CreateListenSocket(23333);
 
-	evServerSocketTest();
+//	evServerSocketTest();
+//	int iRet = evbufferTest(argc, argv);
 
 	cout << "Test End" << endl; // prints 23333
 	return 0;
